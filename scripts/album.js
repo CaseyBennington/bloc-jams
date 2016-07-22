@@ -30,6 +30,22 @@ var albumMarconi = {
     ]
 };
 
+// Yet Another Example Album
+var albumWeird = {
+    title: 'Mandatory Fun',
+    artist: 'Weird Al',
+    label: 'Not Atlantic Records',
+    year: '2004',
+    albumArtUrl: 'assets/images/album_covers/02.png',
+    songs: [
+        { title: 'White and Nerdy', duration: '1:21' },
+        { title: 'Amish Paradise', duration: '3:11' },
+        { title: 'The Saga Begins', duration: '2:51' },
+        { title: 'Word Crimes', duration: '2:54' },
+        { title: 'Tacky', duration: '3:44' }
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength){
     var template =
         '<tr class="album-view-song-item">'
@@ -62,4 +78,10 @@ var setCurrentAlbum = function(album){
 
 window.onload = function(){
     setCurrentAlbum(albumPicasso);
+    var albumImage = document.getElementsByClassName('album-cover-art')[0];
+    var albums = [albumWeird, albumMarconi, albumPicasso];
+    
+    albumImage.addEventListener("click", function(event){
+        setCurrentAlbum(albums[Math.floor(Math.random() * 3)]);
+    });
 };
