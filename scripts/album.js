@@ -30,18 +30,17 @@ var albumMarconi = {
     ]
 };
 
-var createSongRow = function( songNumber, songName, songLength ) {
+var createSongRow = function (songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
-        +'  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
-        +'  <td class="song-item-item">' + songName + '</td>'
-        +'  <td class="song-item-duration">' + songLength + '</td>'
-        +'</tr>'
-        ;
+        + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
+        + '  <td class="song-item-title">' + songName + '</td>'
+        + '  <td class="song-item-duration">' + songLength + '</td>'
+        + '</tr>';
     return template;
 };
 
-var setCurrentAlbum = function(album){
+var setCurrentAlbum = function (album) {
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
@@ -60,7 +59,7 @@ var setCurrentAlbum = function(album){
     }
 };
 
-var  findParentByClassName = function(element, targetClass){
+var findParentByClassName = function (element, targetClass) {
     if (element) {
         var currentParent = element.parentElement;
         while (currentParent.className != targetClass && currentParent.className !== null) {
@@ -70,7 +69,7 @@ var  findParentByClassName = function(element, targetClass){
     }
 };
 
-var getSongItem = function(element) {
+var getSongItem = function (element) {
     switch (element.className) {
         case 'album-song-button':
         case 'ion-play':
@@ -88,7 +87,7 @@ var getSongItem = function(element) {
     }
 };
 
-var clickHandler = function(targetElement) {
+var clickHandler = function (targetElement) {
     var songItem = getSongItem(targetElement);
     
     if (currentlyPlayingSong === null) {
@@ -111,19 +110,19 @@ var songRows = document.getElementsByClassName('album-view-song-item');
 
 // Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
-var pauseButtonTemplate = '<a class="album-song-button"><span clsss="ion-pause"></span></a>';
+var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
 // Store state of playing songs
 var currentlyPlayingSong = null;
 
-window.onload = function(){
+window.onload = function () {
     setCurrentAlbum(albumPicasso);
     
     songListContainer.addEventListener('mouseover', function(event){
         // Only target individual song rows during event delegation
         if (event.target.parentElement.className === 'album-view-song-item') {
             var songItem = getSongItem(event.target);
-            
+
             if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
                 songItem.innerHTML = playButtonTemplate;
             }
